@@ -31,11 +31,11 @@ SRC 		= free_memory.c	\
 
 OBJ = ${SRC:.c=.o}
 
-all: $(NAME)
+all: libft mlx $(NAME)
 
-$(NAME): libft mlx $(OBJ) 
+$(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L libft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit
-
+	
 mlx:
 	make -C mlx/
 
