@@ -39,12 +39,12 @@ char	*get_next_line(int fd)
 	char		buffer[BUFFER_SIZE + 1];
 	int			size;
 
-	size = read(fd, buffer, BUFFER_SIZE);
-	if (size == -1 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer[size] = 0;
+	size = read(fd, buffer, BUFFER_SIZE);
 	while (size > 0)
 	{
+		buffer[size] = 0;
 		if (!s)
 			s = ft_strdup(buffer);
 		else
@@ -52,7 +52,6 @@ char	*get_next_line(int fd)
 		if (ft_strchr(buffer, '\n'))
 			break ;
 		size = read(fd, buffer, BUFFER_SIZE);
-		buffer[size] = 0;
 	}
 	if (s)
 		dest = ft_substr(s, 0, ft_strchr(s, '\n') - s + 1);
